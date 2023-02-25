@@ -2,6 +2,7 @@ import ctypes
 import pkg_resources
 import platform
 
+print("XR Platform:", platform.system())
 if platform.system() == "Windows":
     library_name = "openxr_loader.dll"
 elif platform.system() == "Linux":
