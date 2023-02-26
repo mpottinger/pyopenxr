@@ -7,11 +7,6 @@ from typing import Sequence
 # TODO: separate package for opengl stuff
 import xr
 
-if platform.system() == "Windows":
-    from OpenGL import WGL
-elif platform.system() == "Linux":
-    from OpenGL import GLX
-import glfw
 
 from .enums import *
 from .typedefs import *
@@ -105,72 +100,6 @@ class SystemObject(object):
     def __exit__(self, exception_type, value, traceback):
         self.id = None
 
-
-class GlfwWindow(object):
-    def __init__(
-            self,
-            system: SystemObject,
-            title: str = None,
-            mirror_window: bool = False
-    ) -> None:
-        if title is None:
-            title = system.instance.application_name
-        if not glfw.init():
-            raise XrException("GLFW initialization failed")
-        if mirror_window:
-            self.window_size = [s // 4 for s in system.render_target_size]
-        else:
-            self.window_size = (64, 64)
-            glfw.window_hint(glfw.VISIBLE, False)
-        self.system = system
-        self.pxrGetOpenGLGraphicsRequirementsKHR = ctypes.cast(
-            get_instance_proc_addr(
-                self.system.instance.handle,
-                "xrGetOpenGLGraphicsRequirementsKHR",
-            ),
-            PFN_xrGetOpenGLGraphicsRequirementsKHR
-        )
-        self.graphics_requirements = GraphicsRequirementsOpenGLKHR()  # TODO: others
-        result = self.pxrGetOpenGLGraphicsRequirementsKHR(
-            self.system.instance.handle,
-            self.system.id,
-            ctypes.byref(self.graphics_requirements))  # TODO: pythonic wrapper
-        result = check_result(Result(result))
-        if result.is_exception():
-            raise result
-        glfw.window_hint(glfw.DOUBLEBUFFER, False)
-        glfw.window_hint(glfw.CONTEXT_VERSION_MAJOR, 4)
-        glfw.window_hint(glfw.CONTEXT_VERSION_MINOR, 5)
-        glfw.window_hint(glfw.OPENGL_PROFILE, glfw.OPENGL_CORE_PROFILE)
-        self.window = glfw.create_window(*self.window_size, title, None, None)
-        if self.window is None:
-            raise XrException("Failed to create GLFW window")
-        glfw.make_context_current(self.window)
-        # Attempt to disable vsync on the desktop window, or
-        # it will interfere with the OpenXR frame loop timing
-        glfw.swap_interval(0)
-        self.graphics_binding = None
-        if platform.system() == "Windows":
-            self.graphics_binding = GraphicsBindingOpenGLWin32KHR()
-            self.graphics_binding.h_dc = WGL.wglGetCurrentDC()
-            self.graphics_binding.h_glrc = WGL.wglGetCurrentContext()
-        elif platform.system() == "Linux":
-            drawable = GLX.glXGetCurrentDrawable()
-            context = GLX.glXGetCurrentContext()
-            display = GLX.glXGetCurrentDisplay()
-            self.graphics_binding = GraphicsBindingOpenGLXlibKHR(
-                x_display=display,
-                glx_drawable=drawable,
-                glx_context=context,
-            )
-        else:
-            raise NotImplementedError
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exception_type, value, traceback):
-        glfw.terminate()
 
 
 class SessionObject(object):
@@ -281,7 +210,6 @@ class SpaceObject(object):
 
 __all__ = [
     "Eye",
-    "GlfwWindow",
     "InstanceObject",
     "SessionObject",
     "SpaceObject",

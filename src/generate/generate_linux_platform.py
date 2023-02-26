@@ -7,11 +7,7 @@ import xrg
 
 def main():
     compiler_args = [
-        "-DXR_USE_GRAPHICS_API_OPENGL",
         "-DXR_USE_GRAPHICS_API_VULKAN",
-        "-DXR_USE_PLATFORM_WAYLAND",
-        "-DXR_USE_PLATFORM_XCB",
-        "-DXR_USE_PLATFORM_XLIB",
         "-DXR_USE_TIMESPEC",
     ]
     cg = xrg.CodeGenerator(
@@ -30,7 +26,6 @@ def main():
     print(inspect.cleandoc("""
         import ctypes
         from typing import Optional
-        from OpenGL import GLX
 
         from ..array_field import *
         from ..enums import *

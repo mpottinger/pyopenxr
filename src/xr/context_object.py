@@ -6,7 +6,6 @@ from .enums import *
 from .exception import *
 from .typedefs import *
 from .functions import *
-from .opengl_graphics import OpenGLGraphics
 
 
 class SwapchainStruct(Structure):
@@ -59,13 +58,7 @@ class ContextObject(object):
         )
 
         if self._session_create_info.next is None:
-            self.graphics = OpenGLGraphics(
-                instance=self.instance,
-                system=self.system_id,
-                title=self._instance_create_info.application_info.application_name.decode()
-            )
-            self.graphics_binding_pointer = cast(pointer(self.graphics.graphics_binding), c_void_p)
-            self._session_create_info.next = self.graphics_binding_pointer
+            self.graphics_binding_pointer = None
         else:
             self.graphics_binding_pointer = self._session_create_info.next
 

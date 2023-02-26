@@ -28,7 +28,6 @@ from .exception import *
 from .classes import *
 from .api_layer import *
 from .context_object import *
-from .opengl_graphics import *
 from .matrix4x4f import *
 
 
