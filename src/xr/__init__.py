@@ -12,10 +12,8 @@ from . import (
     platform,
     exception,
     classes,
-    api_layer,
     context_object,
     matrix4x4f,
-    extension,
 )
 
 from .version import *
@@ -26,16 +24,13 @@ from .functions import *
 from .platform import *
 from .exception import *
 from .classes import *
-from .api_layer import *
 from .context_object import *
 from .matrix4x4f import *
 
 
 # from .experiment import *
 
-__all__ = [
-    "extension",
-]
+__all__ = []
 
 for subpackage in (
     version,
@@ -46,13 +41,9 @@ for subpackage in (
     platform,
     exception,
     classes,
-    api_layer,
     context_object,
     matrix4x4f,
 ):
     __all__ += subpackage.__all__
-
-from .api_layer.steamvr_linux_destroyinstance_layer import SteamVrLinuxDestroyInstanceLayer
-__all__ += "SteamVrLinuxDestroyInstanceLayer"
 
 __version__ = version.PYOPENXR_VERSION  # Not in __all__, right?
