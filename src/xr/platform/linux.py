@@ -4,7 +4,6 @@ from ctypes import CFUNCTYPE, POINTER, Structure, c_char_p, c_float, c_int, c_lo
 
 import ctypes
 from typing import Optional
-from OpenGL import GLX
 
 from ..array_field import *
 from ..enums import *
