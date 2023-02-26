@@ -14,7 +14,6 @@ from . import (
     classes,
     api_layer,
     context_object,
-    opengl_graphics,
     matrix4x4f,
     extension,
 )
@@ -50,7 +49,6 @@ for subpackage in (
     classes,
     api_layer,
     context_object,
-    opengl_graphics,
     matrix4x4f,
 ):
     __all__ += subpackage.__all__
