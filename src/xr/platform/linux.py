@@ -93,168 +93,6 @@ class VulkanSwapchainFormatListCreateInfoKHR(Structure):
     ]
 
 
-class GraphicsBindingOpenGLXlibKHR(Structure):
-    def __init__(
-        self,
-        x_display: POINTER(GLX.Display) = None,
-        visualid: int = 0,
-        glx_fbconfig: GLX.GLXFBConfig = None,
-        glx_drawable: GLX.GLXDrawable = 0,
-        glx_context: GLX.GLXContext = None,
-        next: c_void_p = None,
-        type: StructureType = StructureType.GRAPHICS_BINDING_OPENGL_XLIB_KHR,
-    ) -> None:
-        super().__init__(
-            x_display=x_display,
-            visualid=visualid,
-            glx_fbconfig=glx_fbconfig,
-            glx_drawable=glx_drawable,
-            glx_context=glx_context,
-            next=next,
-            type=type,
-        )
-
-    def __repr__(self) -> str:
-        return f"xr.GraphicsBindingOpenGLXlibKHR(x_display={repr(self.x_display)}, visualid={repr(self.visualid)}, glx_fbconfig={repr(self.glx_fbconfig)}, glx_drawable={repr(self.glx_drawable)}, glx_context={repr(self.glx_context)}, next={repr(self.next)}, type={repr(self.type)})"
-
-    def __str__(self) -> str:
-        return f"xr.GraphicsBindingOpenGLXlibKHR(x_display={self.x_display}, visualid={self.visualid}, glx_fbconfig={self.glx_fbconfig}, glx_drawable={self.glx_drawable}, glx_context={self.glx_context}, next={self.next}, type={self.type})"
-
-    _fields_ = [
-        ("type", StructureType.ctype()),
-        ("next", c_void_p),
-        ("x_display", POINTER(GLX.Display)),
-        ("visualid", c_uint32),
-        ("glx_fbconfig", GLX.GLXFBConfig),
-        ("glx_drawable", GLX.GLXDrawable),
-        ("glx_context", GLX.GLXContext),
-    ]
-
-
-class GraphicsBindingOpenGLXcbKHR(Structure):
-    def __init__(
-        self,
-        connection: POINTER(c_int) = None,
-        screen_number: int = 0,
-        fbconfigid: int = 0,
-        visualid: int = 0,
-        glx_drawable: int = 0,
-        glx_context: int = 0,
-        next: c_void_p = None,
-        type: StructureType = StructureType.GRAPHICS_BINDING_OPENGL_XCB_KHR,
-    ) -> None:
-        super().__init__(
-            connection=connection,
-            screen_number=screen_number,
-            fbconfigid=fbconfigid,
-            visualid=visualid,
-            glx_drawable=glx_drawable,
-            glx_context=glx_context,
-            next=next,
-            type=type,
-        )
-
-    def __repr__(self) -> str:
-        return f"xr.GraphicsBindingOpenGLXcbKHR(connection={repr(self.connection)}, screen_number={repr(self.screen_number)}, fbconfigid={repr(self.fbconfigid)}, visualid={repr(self.visualid)}, glx_drawable={repr(self.glx_drawable)}, glx_context={repr(self.glx_context)}, next={repr(self.next)}, type={repr(self.type)})"
-
-    def __str__(self) -> str:
-        return f"xr.GraphicsBindingOpenGLXcbKHR(connection={self.connection}, screen_number={self.screen_number}, fbconfigid={self.fbconfigid}, visualid={self.visualid}, glx_drawable={self.glx_drawable}, glx_context={self.glx_context}, next={self.next}, type={self.type})"
-
-    _fields_ = [
-        ("type", StructureType.ctype()),
-        ("next", c_void_p),
-        ("connection", POINTER(c_int)),
-        ("screen_number", c_uint32),
-        ("fbconfigid", c_int),
-        ("visualid", c_int),
-        ("glx_drawable", c_int),
-        ("glx_context", c_int),
-    ]
-
-
-class GraphicsBindingOpenGLWaylandKHR(Structure):
-    def __init__(
-        self,
-        display: POINTER(wl_display) = None,
-        next: c_void_p = None,
-        type: StructureType = StructureType.GRAPHICS_BINDING_OPENGL_WAYLAND_KHR,
-    ) -> None:
-        super().__init__(
-            display=display,
-            next=next,
-            type=type,
-        )
-
-    def __repr__(self) -> str:
-        return f"xr.GraphicsBindingOpenGLWaylandKHR(display={repr(self.display)}, next={repr(self.next)}, type={repr(self.type)})"
-
-    def __str__(self) -> str:
-        return f"xr.GraphicsBindingOpenGLWaylandKHR(display={self.display}, next={self.next}, type={self.type})"
-
-    _fields_ = [
-        ("type", StructureType.ctype()),
-        ("next", c_void_p),
-        ("display", POINTER(wl_display)),
-    ]
-
-
-class SwapchainImageOpenGLKHR(Structure):
-    def __init__(
-        self,
-        image: int = 0,
-        next: c_void_p = None,
-        type: StructureType = StructureType.SWAPCHAIN_IMAGE_OPENGL_KHR,
-    ) -> None:
-        super().__init__(
-            image=image,
-            next=next,
-            type=type,
-        )
-
-    def __repr__(self) -> str:
-        return f"xr.SwapchainImageOpenGLKHR(image={repr(self.image)}, next={repr(self.next)}, type={repr(self.type)})"
-
-    def __str__(self) -> str:
-        return f"xr.SwapchainImageOpenGLKHR(image={self.image}, next={self.next}, type={self.type})"
-
-    _fields_ = [
-        ("type", StructureType.ctype()),
-        ("next", c_void_p),
-        ("image", c_uint32),
-    ]
-
-
-class GraphicsRequirementsOpenGLKHR(Structure):
-    def __init__(
-        self,
-        min_api_version_supported: Version = Version(),
-        max_api_version_supported: Version = Version(),
-        next: c_void_p = None,
-        type: StructureType = StructureType.GRAPHICS_REQUIREMENTS_OPENGL_KHR,
-    ) -> None:
-        super().__init__(
-            min_api_version_supported=min_api_version_supported.number(),
-            max_api_version_supported=max_api_version_supported.number(),
-            next=next,
-            type=type,
-        )
-
-    def __repr__(self) -> str:
-        return f"xr.GraphicsRequirementsOpenGLKHR(min_api_version_supported={repr(self.min_api_version_supported)}, max_api_version_supported={repr(self.max_api_version_supported)}, next={repr(self.next)}, type={repr(self.type)})"
-
-    def __str__(self) -> str:
-        return f"xr.GraphicsRequirementsOpenGLKHR(min_api_version_supported={self.min_api_version_supported}, max_api_version_supported={self.max_api_version_supported}, next={self.next}, type={self.type})"
-
-    _fields_ = [
-        ("type", StructureType.ctype()),
-        ("next", c_void_p),
-        ("min_api_version_supported", VersionNumber),
-        ("max_api_version_supported", VersionNumber),
-    ]
-
-
-PFN_xrGetOpenGLGraphicsRequirementsKHR = CFUNCTYPE(Result.ctype(), Instance, SystemId, POINTER(GraphicsRequirementsOpenGLKHR))
-
 
 class GraphicsBindingVulkanKHR(Structure):
     def __init__(
@@ -622,12 +460,8 @@ __all__ = [
     "FB_foveation_vulkan_SPEC_VERSION",
     "FB_swapchain_update_state_vulkan",
     "FB_swapchain_update_state_vulkan_SPEC_VERSION",
-    "GraphicsBindingOpenGLWaylandKHR",
-    "GraphicsBindingOpenGLXcbKHR",
-    "GraphicsBindingOpenGLXlibKHR",
     "GraphicsBindingVulkan2KHR",
     "GraphicsBindingVulkanKHR",
-    "GraphicsRequirementsOpenGLKHR",
     "GraphicsRequirementsVulkan2KHR",
     "GraphicsRequirementsVulkanKHR",
     "KHR_CONVERT_TIMESPEC_TIME_EXTENSION_NAME",
@@ -652,7 +486,6 @@ __all__ = [
     "PFN_xrConvertTimespecTimeToTimeKHR",
     "PFN_xrCreateVulkanDeviceKHR",
     "PFN_xrCreateVulkanInstanceKHR",
-    "PFN_xrGetOpenGLGraphicsRequirementsKHR",
     "PFN_xrGetVulkanDeviceExtensionsKHR",
     "PFN_xrGetVulkanGraphicsDevice2KHR",
     "PFN_xrGetVulkanGraphicsDeviceKHR",
@@ -660,7 +493,6 @@ __all__ = [
     "PFN_xrGetVulkanGraphicsRequirementsKHR",
     "PFN_xrGetVulkanInstanceExtensionsKHR",
     "SwapchainImageFoveationVulkanFB",
-    "SwapchainImageOpenGLKHR",
     "SwapchainImageVulkan2KHR",
     "SwapchainImageVulkanKHR",
     "SwapchainStateSamplerVulkanFB",
